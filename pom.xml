@@ -75,6 +75,8 @@
 	<properties>
 		<project.build.sourceEncoding>US-ASCII</project.build.sourceEncoding>
 		<emacsMode>true</emacsMode>
+		<jetty.version>9.2.0.M0</jetty.version>
+		<tomcat.version>8.0.5</tomcat.version>
 	</properties>
 
 	<build>
@@ -175,7 +177,7 @@
 			<plugin>
 				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
-				<version>9.2.0.M0</version>
+				<version>${jetty.version}</version>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
@@ -236,9 +238,22 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.0.1</version>
-			<!-- Prevent CCE when deploying with Tomcat: -->
+			<!-- Prevent CCE when deploying with Jetty/Tomcat: -->
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-servlets</artifactId>
+			<version>${jetty.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<!-- Apparently, tomcat-catalina can't be used outside of Tomcat -->
+		<!--dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-catalina</artifactId>
+			<version>${tomcat.version}</version>
+			<scope>runtime</scope>
+		</dependency-->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
