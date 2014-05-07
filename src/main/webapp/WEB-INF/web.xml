@@ -10,13 +10,27 @@
 		xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
 		xsi:schemaLocation = "http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 	<servlet>
-		<servlet-name>default</servlet-name>
+		<servlet-name>core</servlet-name>
 		<servlet-class>com.intersystems.iknow.languagemodel.slavic.service.CoreServlet</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
+		<servlet-name>core</servlet-name>
+		<url-pattern>/analyzer/</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
 		<servlet-name>default</servlet-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>*.htm</url-pattern>
+		<url-pattern>*.html</url-pattern>
+		<url-pattern>*.js</url-pattern>
+		<url-pattern>*.css</url-pattern>
+		<url-pattern>*.gif</url-pattern>
+		<url-pattern>*.png</url-pattern>
+		<url-pattern>*.jpeg</url-pattern>
+		<url-pattern>*.jpg</url-pattern>
+		<url-pattern>*.jpe</url-pattern>
+		<url-pattern>*.jfif</url-pattern>
 	</servlet-mapping>
 
 	<!-- Tomcat -->
@@ -35,4 +49,8 @@
 		<filter-name>cross-origin</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+
+	<welcome-file-list>
+		<welcome-file>analyzer.html</welcome-file>
+	</welcome-file-list>
 </web-app>
