@@ -52,22 +52,22 @@ $(document).ready(function() {
 
 function analyze() {
 	var text = $("#input").val();
-    var queryUrl = "/analyzer/?text=" + text;
+	var queryUrl = "/analyzer/?text=" + text;
 
-    $.ajax({
-        type: 'POST',
-        url: queryUrl,
-        async: true,
-        contentType: "application/json",
-        dataType: 'json',
-        success: function(json) {
-            try {
-        	    visualize(json);
-            } catch (e) {
-            	alert(e.message);
-            }
-        }
-    });
+	$.ajax({
+		type: 'POST',
+		url: queryUrl,
+		async: true,
+		contentType: "application/json",
+		dataType: 'json',
+		success: function(json) {
+			try {
+				visualize(json);
+			} catch (e) {
+				alert(e.message);
+			}
+		}
+	});
 }
 
 function visualize(json) {
