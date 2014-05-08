@@ -1,0 +1,1416 @@
+/* HTML StyleSheet for DocBook */
+/* Copyright (c) 2001-2008, InterSystems Corp. ALL RIGHTS RESERVED. */
+
+/* general styles */
+
+BODY {
+	color: black;
+	background: white;
+    margin: 0px;
+    padding: 0px;
+	font-family: lucida sans unicode,verdana,sans-serif;
+}
+
+BODY.Dialog {
+	color: black;
+	background: #C0C0C0;
+	font-family: lucida sans unicode,verdana,sans-serif;
+	margin: 10px;
+}
+
+PRE.normal {
+	font-family: lucida sans unicode,verdana,sans-serif;
+}
+
+PRE.monospaced {
+	font-family: courier new,courier,monospace;
+}
+
+/* inline styles */
+
+SPAN.citetitle  { font-style: italic; }
+SPAN.classname  { font-weight: bold; color: darkblue; }
+SPAN.computeroutput { font-family: courier new,courier,monospace; }
+SPAN.constant   { font-style: italic; }
+SPAN.command    { font-weight: bold; }
+SPAN.emphasis   { font-style: italic; }
+SPAN.EmphasisCaption { font-weight: bold; }
+SPAN.EmphasisUnderline { text-decoration: underline; }
+SPAN.filename   { font-weight: bold; }
+SPAN.firstterm  { font-style: italic; }
+SPAN.function   { font-weight: bold; }
+SPAN.guibutton  { font-weight: bold; color: #008000; }
+SPAN.guilabel   { font-weight: bold; color: #008000; }
+SPAN.guimenu    { font-weight: bold; color: #008000; }
+SPAN.guimenuitem { font-weight: bold; color: #008000; }
+SPAN.guisubmenu { font-weight: bold; color: #008000; }
+SPAN.interface  { font-weight: bold; }
+SPAN.indexterm  { display: none; }
+SPAN.primary    { display: none; }
+SPAN.keycap     { font-weight: bold; }
+
+SPAN.literal    { font-family: courier new,courier,monospace; font-weight: bold; }
+SPAN.methodname { font-weight: bold; }
+SPAN.parameter  { font-style: italic; }
+SPAN.property   { font-style: italic; }
+SPAN.quote      { clear: none; }
+SPAN.remark     { font-weight: bold; font-size: 1.3em; }
+SPAN.replaceable { font-style: italic; }
+SPAN.superscript { vertical-align: super; font-size: 0.7em; color: darkblue; }
+SPAN.systemitem { font-family: courier new,courier,monospace; color: black; font-weight: bold; }
+SPAN.varname    { font-style: italic; }
+SPAN.userinput  { font-family: courier new,courier,monospace; font-weight: bold; }
+
+/* "hidden" remarks */
+/* SPAN.hidden      { color: #FF0000; display: none; } */
+
+/* used by KNBASE */
+SPAN.sourcetime { font-size: 0.8em; color: #FF0000; }
+
+/* used for security-related warnings */
+SPAN.securityhome { font-weight: bold; color: darkblue; }
+
+/* inline graphic elements */
+DIV.graphic {
+	text-align: center;
+}
+
+/* syntax coloring styles */
+
+/* COS */
+SPAN.COS00 {color: #FF0000; background-color: white; text-decoration: underline; }
+SPAN.COS01 { clear: none; }
+SPAN.COS02 { clear: none; }
+SPAN.COS03 {color: #ff0000; }
+SPAN.COS04 {color: black; }
+SPAN.COS05 {color: darkblue; }
+SPAN.COS06 {color: #008000; }
+SPAN.COS07 {color: #008000; }
+SPAN.COS08 {color: black; }
+SPAN.COS09 {color: #800080; }
+SPAN.COS0A {color: darkblue; }
+SPAN.COS0B {color: darkblue; }
+SPAN.COS0C {color: darkblue; }
+SPAN.COS0D {color: black; }
+SPAN.COS0E {color: black; }
+SPAN.COS0F {color: darkblue; }
+SPAN.COS10 {color: black; }
+SPAN.COS11 {color: darkblue; }
+SPAN.COS12 {color: black; }
+SPAN.COS13 {color: black; }
+SPAN.COS14 {color: black; }
+SPAN.COS15 {color: black; }
+SPAN.COS16 {color: black; }
+SPAN.COS17 {color: black; }
+SPAN.COS18 {color: black; }
+SPAN.COS19 {color: black; }
+SPAN.COS1A {color: black; }
+SPAN.COS1B {color: darkblue; }
+SPAN.COS1C {color: darkblue; }
+SPAN.COS1D {color: #800080; }
+SPAN.COS1E {color: darkblue; }
+SPAN.COS1F {color: #008080; }
+SPAN.COS20 {color: #000080; }
+SPAN.COS21 {color: black; }
+SPAN.COS22 { clear: none; }
+SPAN.COS23 {color: darkblue; }
+SPAN.COS24 {color: darkblue; }
+SPAN.COS25 {color: #000080; }
+SPAN.COS26 { clear: none; }
+SPAN.COS27 { clear: none; }
+SPAN.COS28 { clear: none; }
+SPAN.COS29 {color: #808000; }
+SPAN.COS2A {color: #800080; }
+SPAN.COS2B {color: #800080; }
+
+
+/* HTML / CSP  */
+SPAN.HTML00 {color: #FF0000; background-color: white; text-decoration: underline; }
+SPAN.HTML01 { clear: none; }
+SPAN.HTML02 { clear: none; }
+SPAN.HTML03 {color: black; }
+SPAN.HTML04 {color: #008000; }
+SPAN.HTML05 {color: black; }
+SPAN.HTML06 {color: #000080; }
+SPAN.HTML07 {color: #000080; }
+SPAN.HTML08 {color: #000080; }
+SPAN.HTML09 {color: black; }
+SPAN.HTML0A {color: #800080; }
+SPAN.HTML0B {color: #804040; }
+SPAN.HTML0C {color: black; }
+
+/* XML  */
+SPAN.XML00 {color: #FF0000; background-color: white; text-decoration: underline; }
+SPAN.XML01 { clear: none; } /* white space */
+SPAN.XML02 { clear: none; }
+SPAN.XML03 {color: black; }
+SPAN.XML04 {color: #008000; }
+SPAN.XML05 {color: #804040; }
+SPAN.XML06 {color: #000080; }
+SPAN.XML07 {color: #000080; }
+SPAN.XML08 {color: #000080; }
+SPAN.XML09 {color: #800080; }
+SPAN.XML0B {color: #804040; }
+SPAN.XML0C {color: black; }
+SPAN.XML0E {color: #008080; }  /* PI */
+SPAN.XML0F {color: #008000; }  /* comment */
+SPAN.XML11 {color: #800080; }  /* attribute */
+
+/* BAS */
+SPAN.BAS00 {color: #FF0000; background-color: white; text-decoration: underline; }
+SPAN.BAS01 { clear: none; }
+SPAN.BAS02 { clear: none; }
+SPAN.BAS03 {color: black; }
+SPAN.BAS04 {color: black; }
+SPAN.BAS05 {color: #000080; }
+SPAN.BAS06 {color: #008000; }
+SPAN.BAS07 {color: #000080; }
+SPAN.BAS08 {color: black; }
+SPAN.BAS09 {color: darkblue; }
+SPAN.BAS0A {color: black; }
+SPAN.BAS0B {color: black; }
+SPAN.BAS0C {color: black; }
+SPAN.BAS0D {color: darkblue; }
+SPAN.BAS0E {color: black; }
+SPAN.BAS0F {color: #008080; }
+SPAN.BAS10 {color: black; }
+SPAN.BAS11 {color: darkblue; }
+SPAN.BAS12 {color: darkblue; }
+SPAN.BAS13 {color: black; }
+SPAN.BAS14 {color: black; }
+SPAN.BAS15 {color: #008000; }
+SPAN.BAS16 {color: #108060; } /* string literal */
+SPAN.BAS17 {color: darkblue; }
+SPAN.BAS18 {color: #ff0000; }
+SPAN.BAS19 {color: black; }
+SPAN.BAS1A {color: black; }
+
+/* CLS */
+SPAN.CLS00 {color: #FF0000; background-color: white; text-decoration: underline; }
+SPAN.CLS01 { clear: none; }
+SPAN.CLS02 { clear: none; }
+SPAN.CLS03 { clear: none; }
+SPAN.CLS04 {color: #000080; }  /* keyword */
+SPAN.CLS05 {color: #2200FF; }  /* classname */
+SPAN.CLS06 {color: #108020; }  /* comment */
+SPAN.CLS07 {color: #108060; }  /* description */
+
+SPAN.CLS0A {color: #008080; }  /* string literal */
+
+SPAN.CLS0B {color: #408020; }  /* classmember */
+SPAN.CLS0D {color: black; }  /* , */
+
+/* JAVA */
+SPAN.JAVA00 {color: #FF0000; background-color: white; text-decoration: underline; } /* error */
+SPAN.JAVA01 { clear: none; }    /* white space */
+SPAN.JAVA02 { clear: none; }    /* obsolete */
+SPAN.JAVA03 { clear: none; }    /* label */
+SPAN.JAVA04 {color: #000011; } /* delimiter */
+SPAN.JAVA05 {color: #2200FF; font-weight: bold; }  /* classname */
+SPAN.JAVA06 { clear: none; }    /* interfacename */
+SPAN.JAVA07 {color: #00A008; } /* string literal */
+SPAN.JAVA08 {color: #108020; } /* comments */
+SPAN.JAVA09 {color: #008080; } /* character literal */
+SPAN.JAVA0A {color: #008080; } /* integer literal */
+SPAN.JAVA0B {color: #008080; } /* hexadecimal literal */
+SPAN.JAVA0C {color: #008080; } /* octal literal */
+SPAN.JAVA0D {color: #008080; } /* float literal */
+SPAN.JAVA0E {color: darkblue; } /* identifier */
+SPAN.JAVA0F {color: #002200; } /* operator */
+SPAN.JAVA10 {color: #208020; } /* definition keyword */
+SPAN.JAVA11 {color: #404040; } /* statement keyword */
+SPAN.JAVA12 {color: #404040; } /* literal keyword */
+SPAN.JAVA13 {color: #404040; } /* native type */
+SPAN.JAVA14 {color: #404080; } /* object keyword */
+
+/* JAVASCRIPT */
+SPAN.JAVASCRIPT00 {color: #FF0000; background-color: white; text-decoration: underline; } /* error */
+SPAN.JAVASCRIPT01 { clear: none; } /* white space */
+SPAN.JAVASCRIPT02 { clear: none; } /* obsolete */
+SPAN.JAVASCRIPT03 { clear: none; } /*label */
+SPAN.JAVASCRIPT04 {color: #000011; } /* delimiter (;) */
+SPAN.JAVASCRIPT05 {color: #00A008; } /* string literal */
+SPAN.JAVASCRIPT06 {color: #108020; } /* comment */
+SPAN.JAVASCRIPT07 {color: #008080; } /* integer literal */
+SPAN.JAVASCRIPT08 {color: #108020; } /* hexadecimal literal */
+SPAN.JAVASCRIPT09 {color: #008080; } /* floating-point literal */
+SPAN.JAVASCRIPT0A {color: #008080; } /* regexp delimiter */
+SPAN.JAVASCRIPT0B {color: #008080; } /* regexp body */
+SPAN.JAVASCRIPT0C {color: #008080; } /* regexp escape */
+SPAN.JAVASCRIPT0D {color: #008080; } /* regexp flags */
+SPAN.JAVASCRIPT0E {color: darkblue; } /* identifier */
+SPAN.JAVASCRIPT0F {color: #002200; } /* operator */
+SPAN.JAVASCRIPT10 {color: #208020; } /* function definition */
+SPAN.JAVASCRIPT11 {color: #404040; } /* statement keyword */
+SPAN.JAVASCRIPT13 {color: #404040; } /* literal keyword */
+SPAN.JAVASCRIPT14 {color: #404080; } /* future keyword */
+SPAN.JAVASCRIPT15 {color: #408080; } /* CSP extension */
+
+/* JAVASCRIPT (in a new guise due to "J" option) */
+SPAN.JS00 {color: #FF0000; background-color: white; text-decoration: underline; } /* error */
+SPAN.JS01 { clear: none; } /* white space */
+SPAN.JS02 { clear: none; } /* obsolete */
+SPAN.JS03 { clear: none; } /*label */
+SPAN.JS04 {color: #000011; } /* delimiter (;) */
+SPAN.JS05 {color: #00A008; } /* string literal */
+SPAN.JS06 {color: #108020; } /* comment */
+SPAN.JS07 {color: #008080; } /* integer literal */
+SPAN.JS08 {color: #108020; } /* hexadecimal literal */
+SPAN.JS09 {color: #008080; } /* floating-point literal */
+SPAN.JS0A {color: #008080; } /* regexp delimiter */
+SPAN.JS0B {color: #008080; } /* regexp body */
+SPAN.JS0C {color: #008080; } /* regexp escape */
+SPAN.JS0D {color: #008080; } /* regexp flags */
+SPAN.JS0E {color: darkblue; } /* identifier */
+SPAN.JS0F {color: #002200; } /* operator */
+SPAN.JS10 {color: #208020; } /* function definition */
+SPAN.JS11 {color: #404040; } /* statement keyword */
+SPAN.JS13 {color: #404040; } /* literal keyword */
+SPAN.JS14 {color: #404080; } /* future keyword */
+SPAN.JS15 {color: #408080; } /* CSP extension */
+
+/* SQL */
+SPAN.SQL00 {color: #FF0000; background-color: white; text-decoration: underline; } /* error */
+SPAN.SQL01 { clear: none; } /* whitespace */
+SPAN.SQL02 { clear: none; }
+SPAN.SQL03 { clear: none; }
+SPAN.SQL04 {color: #00A008; }  /* string */
+SPAN.SQL05 { clear: none; }
+SPAN.SQL06 { clear: none; }
+SPAN.SQL07 { clear: none; }
+SPAN.SQL08 {color: darkblue; }  /* indentifier */
+SPAN.SQL09 { clear: none; }
+SPAN.SQL10 { clear: none; }
+SPAN.SQL0C {color: #208020; } /* operator */
+SPAN.SQL11 {color: #408020; } /* operation (SELECT) */
+SPAN.SQL12 {color: #408030; } /* keyword */
+
+/* TSQL */
+SPAN.TSQL00 {color: #FF0000; background-color: white; text-decoration: underline; } /* error */
+SPAN.TSQL01 {}
+SPAN.TSQL02 {}
+SPAN.TSQL03 {color: #000000; }
+SPAN.TSQL04 {color: #008080; }
+SPAN.TSQL05 {color: #000000; }
+SPAN.TSQL06 {color: #000000; }
+SPAN.TSQL07 {color: #000000; }
+SPAN.TSQL08 {color: #000000; }
+SPAN.TSQL09 {color: #000000; }
+SPAN.TSQL0A {color: #008000; }
+SPAN.TSQL0B {color: #000000; }
+SPAN.TSQL0C {color: #808000; }
+SPAN.TSQL0D {color: #808000; }
+SPAN.TSQL0E {color: #808000; }
+SPAN.TSQL0F {color: #000080; }
+SPAN.TSQL10 {color: #0000ff; }
+SPAN.TSQL11 {color: #000080; }
+SPAN.TSQL12 {color: #000080; }
+SPAN.TSQL13 {color: #000080; }
+SPAN.TSQL14 {color: #008000; }
+SPAN.TSQL15 {color: #ff0000; background: #808080; }
+SPAN.TSQL16 {color: #808000; }
+
+/* color-only langs  */
+SPAN.SPP00 {color: #FF0000; background-color: white; text-decoration: underline; }
+SPAN.SPP01 { clear: none; }
+SPAN.SPP02 { clear: none; }
+SPAN.SPP03 {color: darkblue; }
+SPAN.SPP04 {color: #000080; }
+SPAN.SPP05 {color: #000080; }
+SPAN.SPP06 {color: #000080; }
+SPAN.SPP07 {color: #000080; }
+SPAN.SPP08 {color: #000080; }
+SPAN.SPP09 {color: darkblue; }
+SPAN.SPP0A {color: black; }
+SPAN.SPP0B {color: black; }
+SPAN.SPP0C {color: #008080; }
+SPAN.SPP0D {color: #0080D0; }
+SPAN.SPP0E {color: #ff0000; }
+SPAN.SPP0F {color: black; }
+SPAN.SPP10 {color: #808080; }
+SPAN.SPP11 {color: #008000; }
+
+
+/* feedback link */
+A.FEEDBACK  { font-family: WebDings,"Zapf Dingbats",monospace;
+            font-size: 1em; text-decoration: none; color: #C0C0C0;
+            vertical-align: super;
+            border: none;
+            }
+
+
+/* title bar */
+
+TABLE.Banner { background: #5290EC; padding: 0px; margin: 0px; border-bottom: black solid 1px; }
+
+
+TABLE.ClassBanner {
+	color: white;
+	background: #5290EC;
+}
+
+TABLE.Label {
+	color: black;
+	background: #CBE6EB;
+	font-size: 1.0em;
+}
+
+SPAN.SearchWord { color: black; background: #FFF0B0; font-weight: bold; }
+
+TR.Category {
+	background: #CBE6EB;
+	color: black;
+}
+
+TD.BannerLogo { padding-left: 2px; }
+
+TR.TitleRow     { background: darkblue; color: white; }
+TR.DarkRow  { background: #DDDDDD; }
+TR.LightRow     { background: white; }
+
+TABLE.Paragraph     { padding: 0px;   margin-bottom: 0px;      }
+
+/* search window */
+
+DIV.SearchForm {
+}
+
+INPUT.SearchInput { font-size: 0.8em; }
+
+INPUT.SearchButton { font-size: 0.8em; }
+
+INPUT.SearchRadio { font-size: 0.8em; }
+
+TABLE.SearchForm  {
+	font-size: 1.0em;
+	border: 1px solid black;
+	padding: 2px;
+	background: #C0C0C0;
+	background-image: url(/csp/broker/images/grad-halfgray-10x500.png);
+	background-repeat: repeat-x;
+}
+
+DIV.Modified    {
+	background: #FFF0B0;
+	color: black;
+	border: 1px solid black;
+}
+
+
+TABLE.SearchResultTable {
+	background: white;
+	border: 1px solid black;
+	margin-left: 0px; margin-top: 20px;
+}
+
+A.SearchResult { font-size: 0.7em;
+                    font-weight: bold;
+                    color: darkblue; text-decoration: none;
+                }
+
+A.SearchResultCurr { font-size: 0.8em;
+                    font-weight: bold;
+                    color: white; text-decoration: none;
+                }
+
+TD.SearchResult { background: white;
+                    border-color: #AAAAAA; border-width: 1px; border-style: solid;
+                    padding-left: 2px;
+                    padding-right: 2px;
+                }
+
+TD.SearchResultCurr { background: darkblue;
+                    border-color: #AAAAAA; border-width: 1px; border-style: solid;
+                    padding-left: 2px;
+                    padding-right: 2px;
+                }
+
+TD.SearchDarkRow    { background: #FFDDCC;
+                            border-top: #808080 solid 1px;
+                            border-bottom: black solid 1px; }
+TD.SearchLightRow   { background: #DDEEFF;
+                            border-top: #808080 solid 1px;
+                            border-bottom: black solid 1px; }
+
+/* tables */
+
+TABLE.CALSTable { background: white;
+                    border-color: black;
+                    border-width: 1px;
+                    border-style: solid;
+                    }
+
+TABLE.CALSTable TH { 
+				text-align: left;
+				border-bottom: black solid 1px;
+				background: #C0C0C0;
+				background-image: url(/csp/broker/images/grad-halfgray-10x100.png);
+				background-repeat: repeat-x;
+}
+
+TABLE.CALSTable TH.Frame-all {
+                        border-right: black solid 1px;
+                        margin-bottom: 5px;
+                        margin-top: 5px; }
+
+TABLE.CALSTable TH.Frame-sides {
+                        border-right: black solid 1px;
+                        margin-bottom: 5px;
+                        margin-top: 5px; }
+
+TABLE.CALSTable TD { background: #F5F5F5;
+                      margin-bottom: 5px;
+                      margin-top: 5px; }
+
+TABLE.CALSTable TD UL,TABLE.CALSTable TD UL { margin-left: 0px; }
+
+
+TABLE.CALSTable TD.Frame-all { border-bottom: #808080 solid 1px;
+                                border-right: #808080 solid 1px;
+                                margin-bottom: 5px;
+                                margin-top: 5px; }
+
+TABLE.CALSTable TD.Frame-sides { border-right: #808080 solid 1px;
+                                 margin-bottom: 5px;
+                                 margin-top: 5px; }
+
+TABLE.CALSTable TD.Frame-bottom { border-bottom: #808080 solid 1px;
+                                  margin-bottom: 5px;
+                                  margin-top: 5px; }
+
+TABLE.CALSTable TD DIV {
+	margin-bottom: 4px;
+	margin-top: 4px;
+	line-height: 125%;
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
+DIV.UserComment { background: #FFF0B0; color: #FF0000;
+	font-size: 0.8em;
+	line-height: 125%;
+	border-color: black; border-width: 1px; border-style: solid;
+	padding: 5px;
+}
+
+
+/* menu buttons */
+
+TABLE.MainMenu  { margin: 1px; padding: 0px;
+                background: #BB0000;
+                border-color: black; border-width: 1px; border-style: solid; }
+
+TABLE.MenuControl   { margin: 1px; padding: 2px; }
+
+
+DIV.MenuChoice  { color: white;
+                font-family: sans-serif; font-size: 12pt; margin: 0px;
+                padding: 0px;    }
+
+TD.MenuChoice   { padding: 0px; margin: 0px; }
+
+TD.ToolBar  { padding: 0px; margin: 0px; }
+
+
+A.MenuChoice    { 
+            font-size: 8pt; font-weight: bold;
+            text-decoration: none; color: white;
+            padding: 0px; margin: 0px; }
+
+
+SPAN.MenuChoice { 
+            font-size: 8pt; font-weight: bold;
+            text-decoration: none; color: white;
+            padding: 0px; margin: 0px; }
+
+
+/* Menu search */
+INPUT.QuickSearch { 
+                    font-size: 8pt;
+                    color: darkblue;
+                 }
+
+SELECT.QuickLink { 
+                    font-size: 8pt; width: 200px;
+                    color: darkblue;
+                 }
+
+
+A.Link           { clear: none; font-style: normal; }
+A.Linkforeignkey { clear: none; font-style: normal; }
+A.Linkindex      { clear: none; font-style: normal; }
+A.Linkmethod     { clear: none; font-style: normal; font-weight: bold; }
+A.Linkparameter  { clear: none; font-style: italic; }
+A.Linkprojection { clear: none; font-style: normal; }
+A.Linkproperty   { clear: none; font-style: italic; }
+A.Linkquery      { clear: none; font-style: normal; }
+A.Linktrigger    { clear: none; font-style: normal; }
+A.Linkxdata      { clear: none; font-style: normal; }
+
+A.ClassLink      { color: black; font-weight: bold; text-decoration: none; }
+
+SPAN.classname A { color: darkblue; font-weight: bold; }
+
+
+/* Comment table */
+
+TD.SMALL        { color: darkblue; font-size: 0.8em; }
+
+/* Index page styles */
+
+SPAN.TOCrefpurpose  { color: #808080; font-style: normal; font-size: 0.8em; }
+
+LI.IndexEntry   { list-style-type: disc; }
+A.IndexEntry    { line-height: 150%;
+                    color: darkblue; text-decoration: none; font-size: 1.2em; }
+
+
+SPAN.IndexSourceTitle   { color: #808080; font-weight: bold;
+                        font-style: normal;
+                    font-size: 1.0em; }
+
+SPAN.IndexSource    { color: #808080; text-decoration: none;
+                        font-size: 1.0em; }
+
+TABLE.IndexLetterTable  { 
+	border: #AAAAAA 1px solid;
+	margin-left: 40px;
+	margin-top: 0px;
+	background: #C0C0C0;
+	background-image: url(/csp/broker/images/grad-halfgray-10x100.png);
+	background-repeat: repeat-x;
+}
+
+A.IndexLetter {
+	font-size: 1.4em;
+	font-weight: bold;
+	color: darkblue; text-decoration: none;
+	font-family: "Courier New",Fixed,monospace;
+}
+
+A.IndexLetterCurr {
+	font-size: 1.4em;
+	font-weight: bold;
+	color: white; text-decoration: none;
+	font-family: "Courier New",Fixed,monospace;
+}
+
+TD.IndexLetter  {
+	background: none;
+	border: #AAAAAA 1px solid;
+	padding-left: 4px;
+	padding-right: 4px;
+}
+
+TD.IndexLetterHi {
+	background: #FFF0B0;
+	border: #AAAAAA 2px solid;
+	padding-left: 15px;
+	padding-right: 15px;
+	font-size: 2.0em;
+}
+
+TD.IndexLetterCurr  {
+	background: darkblue;
+	border: #AAAAAA 2px solid;
+	padding-left: 15px;
+	padding-right: 15px;
+	font-size: 2.0em;
+}
+
+TD.IndexLetterCurrHi {
+	background: #FFF0B0;
+	border: #AAAAAA 2px solid;
+	padding-left: 15px;
+	padding-right: 15px;
+	font-size: 2.0em;
+}
+
+/* Table of Contents styles */
+
+DIV.TOC     { margin-bottom: 5px; color: darkblue;
+            }
+
+
+/* Home TOC */
+div.GettingStarted div.para {
+	margin-bottom: 10px;
+	line-height: 125%;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+
+A.TOC {
+	text-decoration: none;
+	font-size: 1.2em;
+	color: darkblue;
+	margin-bottom: 0px;
+}
+
+A.TOC:hover {
+	background: #FFEEAA;
+}
+
+LI.SetTOC   {
+	list-style-type: disc;
+	color: #404040;
+}
+
+TABLE.Home  { margin-left: 80px;
+          margin-right: 20px; }
+TR.Home     { clear: none; }
+TR.HomeGap  { background: #5290EC; font-size: 0.2em; }
+
+TD.HomeTitle    { background: white;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 1.5em;
+            color: darkblue;
+            line-height: 120%;
+            border-bottom: #AAAAAA solid 1px;
+            border-top: #AAAAAA solid 1px;
+            border-left: white solid 1px;
+            border-right: #AAAAAA solid 1px;
+            padding: 5px;
+        }
+
+TD.HomeTitleHi  { background: #FFF0B0;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 1.5em;
+            color: darkblue;
+            line-height: 120%;
+            border: black solid 1px;
+            padding: 5px;
+        }
+
+TD.HomeTitle A { text-decoration: none; color: darkblue;  }
+
+TD.HomeTitleHi A { text-decoration: none; color: darkblue;  }
+
+
+TD.HomeSubTitle { background: white; color: #8080D0;
+            font-size: 0.9em;
+            border-bottom: #AAAAAA solid 1px;
+            border-top: #AAAAAA solid 1px;
+            padding: 5px;
+            }
+
+TD.HomeSubTitleHi { background: white; color: black;
+            font-size: 0.9em;
+            border-bottom: #AAAAAA solid 1px;
+            border-top: #AAAAAA solid 1px;
+            padding: 5px;
+            }
+
+
+/* Book TOC */
+A.TOCChapter { text-decoration: none;
+                font-weight: normal;
+                font-size: 1.5em;
+                color: darkblue;
+                line-height: 120%;
+             }
+
+A.TOCRef { text-decoration: none;
+                font-weight: normal;
+                font-size: 1.0em;
+                color: darkblue;
+                line-height: 130%;
+                margin-bottom: 10px;
+             }
+
+A.TOCSect1 { text-decoration: none;
+                font-weight: normal;
+                font-size: 1.0em;
+                color: darkblue;
+                line-height: 130%;
+                margin-bottom: 5px;
+             }
+
+A.TOCSect2 { text-decoration: none;
+                font-weight: normal;
+                font-size: 0.8em;
+                color: darkblue;
+                line-height: 130%;
+                margin-bottom: 5px;
+             }
+
+MENU LI     { margin-bottom: 5px; }
+
+MENU A      { font-weight: bold;
+                color: darkblue;
+                font-size: 1em; text-decoration: none;
+             }
+
+
+MENU MENU A { font-weight: normal;
+                color: darkblue;
+                font-size: 0.9em; text-decoration: none;
+             }
+
+
+TD.Letter   { color: darkblue; font-weight: bold; text-decoration: none; font-size: 1.4em;
+                margin-left: 80px;
+                background: #E0E0E0; margin-top: 20px; }
+
+SPAN.SearchTitle { color: darkblue; font-size: 0.8em;
+                    font-weight: bold;
+                    margin-bottom: 5px;
+                     padding: 2px; }
+
+DIV.SearchTitle { color: darkblue; font-size: 0.8em;
+                    font-weight: bold;
+                    margin-bottom: 5px;
+                     padding: 2px; }
+
+
+DIV.SearchPath  { font-size: 0.8em;
+                    margin-top: 10px;
+                    margin-bottom: 5px;
+                    margin-right: 20px;
+                    color: #008000;
+                    padding: 2px;
+                 }
+
+
+
+DIV.SearchText  { font-size: 0.8em;
+                    margin-bottom: 5px;
+                    margin-right: 20px;
+                    padding: 2px;
+                 }
+
+DIV.SearchUser  { font-size: 0.7em;
+                 }
+
+DIV.SearchNumber { font-size: 1em; color: #FF0000;
+                    padding: 2px;
+                    }
+
+SPAN.SearchNumber { font-size: 1em; color: #FF0000;
+                    font-weight: bold;
+                    padding: 2px;
+                    }
+
+A.SearchLink    { clear: none; }
+
+
+DIV.Footer          { color: black;  }
+TD.Footer           { font-size: 8pt; }
+
+DIV.BookTitle       { color: #FFF0B0; font-size: 0.8em; margin-left: 5px; }
+
+DIV.BookTitle A     { text-decoration: none; color: #FFF0B0; }
+
+DIV.ChapterTitle    { color: white; font-size: 1.6em;
+                margin-bottom: 1px; margin-left: 5px; }
+
+SPAN.ChapterTitleNo { color: white; font-size: 0.7em; }
+
+UL,OL		{
+			margin-top: 10px;
+			margin-bottom: 0px;
+			margin-left: 80px;
+			margin-right: 20px;
+			padding-left: 20px;
+			padding-right: 0px;
+}
+
+UL		{
+			list-style-type: disc;
+}
+
+LI UL, LI OL {
+			margin-top: 5px;
+			margin-bottom: 10px;
+			margin-left: 0px;
+}
+
+UL {
+                list-style: disc;
+}
+
+UL UL {
+                list-style: circle;
+}
+
+UL UL UL {
+                list-style: disc;
+}
+
+UL UL UL UL {
+                list-style: circle;
+}
+
+TD.anchor { background: #FFF0B0;
+            color: black;
+            font-size: 0.8em;
+            border-top: 1px solid black;
+            border-left: 1px solid black;
+            border-right: 1px solid black;
+          }
+
+/* block styles */
+DIV         { clear: none; }
+
+DIV.anchor  { margin-left: 10px;
+            margin-right: 10px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            padding-left: 20px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            }
+
+DIV.para    { color: black; margin-bottom: 10px;
+                line-height: 125%;
+                margin-left: 80px;
+                margin-right: 20px;
+                }
+
+/* first para in chapter */
+DIV.para1   { color: black; margin-bottom: 10px;
+                line-height: 125%;
+                margin-left: 80px;
+                margin-right: 20px;
+                }
+
+DIV.para1:first-letter  {
+			color: #606060;
+			font-size: 3.2em;
+			font-family: Times, serif, Georgia;
+			padding-top: 2px;
+			float: left;
+			line-height: 0.9em;
+}
+
+br.brpara1 {
+			line-height: 0.25em;
+}
+
+DIV.formalparatitle { color: darkblue; margin-bottom: 10px;
+                line-height: 125%;
+                margin-left: 80px;
+                margin-right: 20px;
+                font-weight: bold;
+                }
+
+DIV.glossentry  { color: darkblue; margin-bottom: 10px;
+                font-weight: bold;
+                line-height: 125%;
+                margin-left: 80px;
+                margin-right: 20px;
+}
+
+DIV.glossdef  { margin-left: 60px;  }
+
+DIV.exampletitle { color: darkblue; margin-bottom: 1px; margin-top: 10px;
+                font-weight: bold;
+                line-height: 125%;
+                margin-left: 80px;
+                margin-right: 20px;
+}
+
+DIV.remark  { background: #FFFF60; color: black;
+            border-color: #FFFF00; border-width: 3px; border-style: solid;
+            font-size: 1.2em;
+            text-align: left;
+            line-height: 125%;
+            margin-left: 80px;
+            margin-right: 20px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-top: 20px;
+            padding-bottom: 10px;
+         }
+
+DIV.literallayout   { color: black;
+            font-family: courier new,courier,monospace;
+            font-size: 1.2em;
+            text-align: left;
+            line-height: 125%;
+            margin-left: 80px;
+            margin-right: 20px;
+            margin-bottom: 10px;
+            padding-left: 10px; padding-top: 0px; padding-bottom: 0px;
+         }
+
+LI DIV.literallayout  { 
+            margin-left: 0px;
+		}
+
+DIV.programlisting  { 
+			color: black;
+            border: 1px solid black;
+            font-family: courier new,courier,monospace;
+            font-size: 1.2em;
+            text-align: left;
+            line-height: 125%;
+            margin-left: 80px;
+            margin-right: 20px;
+            margin-bottom: 10px;
+            padding-left: 10px; padding-top: 0px; padding-bottom: 0px;
+			background: #C0C0C0;
+			background-image: url(/csp/broker/images/grad-halfgray-10x500.png);
+			background-repeat: repeat-x;
+         }
+
+LI DIV.programlisting  { 
+            margin-left: 0px;
+		}
+
+
+DIV.set {
+	margin-top: 25px;
+	padding-top: 5px;
+	padding-left: 15px;
+	padding-bottom: 10px;
+	padding-right: 40px;
+	background: #404040;
+	background-image: url(/csp/broker/images/grad-gray-10x100.png);
+	background-repeat: repeat-x;
+	color: black;
+	font-variant: small-caps;
+	text-align: center;
+	font-size: 1.2em;
+	border-top: 1px solid #808080;
+}
+
+DIV.sect1   { color: darkblue;
+                font-size: 1.8em;
+                margin-left: 5px;
+                margin-right: 5px; margin-top: 30px;
+                border-top: silver solid 1px;
+                margin-bottom: 10px; padding-left: 10px; padding-top: 2px; padding-bottom: 5px; }
+
+DIV.sect2   { color: darkblue;
+                    font-size: 1.6em;
+                    margin-left: 75px;
+                    margin-right: 20px;
+                    margin-top: 20px;
+                    margin-bottom: 10px; padding-left: 0px; padding-top: 2px; padding-bottom: 5px; }
+
+DIV.sect3   { color: darkblue;
+                    font-size: 1.2em;
+                    margin-left: 80px;
+                    margin-right: 20px;
+                    margin-top: 20px;
+                    margin-bottom: 10px; padding-left: 0px; padding-top: 2px; padding-bottom: 5px; }
+
+DIV.sect4   { color: black;
+                    font-size: 1.0em; font-weight: bold;
+                    margin-left: 80px;
+                    margin-right: 20px;
+                    margin-top: 20px;
+                    margin-bottom: 10px; padding-left: 0px; padding-top: 2px; padding-bottom: 5px; }
+
+DIV.refsect1    { background: white; color: darkblue;
+                    font-size: 1.6em;
+                    margin-left: 5px;
+                    margin-right: 5px; margin-top: 30px;
+                    border-top: silver solid 1px;
+                    margin-bottom: 10px; padding-left: 10px; padding-top: 2px; padding-bottom: 5px; }
+
+DIV.refsect2    { background: white; color: darkblue;
+                    font-size: 1.2em;
+                    margin-left: 80px;
+                    margin-right: 20px;
+                    margin-top: 10px;
+                    margin-bottom: 10px; padding-left: 0px; padding-top: 2px; padding-bottom: 5px; }
+
+DIV.refsect3    { background: white; color: darkblue;
+                    margin-left: 80px;
+                    margin-right: 20px;
+                    font-size: 1em;
+                    margin-bottom: 10px; padding-left: 0px; padding-top: 2px; padding-bottom: 5px; }
+
+DIV.refsynopsisdiv  { 
+					background: white; 
+					color: darkblue;
+                    font-size: 1.6em;
+                    margin-left: 5px;
+                    margin-right: 5px; margin-top: 30px;
+                    margin-bottom: 10px; padding-left: 10px; padding-top: 2px; padding-bottom: 5px; }
+
+DIV.synopsis    { 
+			background: #C0C0C0;
+			background-image: url(/csp/broker/images/grad-halfgray-10x500.png);
+			background-repeat: repeat-x;
+			color: black;
+			border: 1px solid black; 
+			text-align: left;
+			line-height: 125%;
+			margin-left: 80px;
+			margin-right: 20px;
+			margin-bottom: 10px;
+			padding-left: 10px; padding-top: 0px; padding-bottom: 0px;
+         }
+
+DIV.refdescriptor   {background: #5290EC;
+            color: white;
+            font-size: 1.6em;
+            border-top: 3px #A0C0EC solid;
+            border-left: 3px #A0C0EC solid;
+            border-right: 3px darkblue solid;
+            border-bottom: 3px darkblue solid;
+            margin-left: 10px;
+            margin-right: 10px;
+            margin-top: 20px;
+            margin-bottom: 5px;
+            padding-left: 20px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            }
+
+DIV.qandaset    { color: darkblue;
+                border-color: black; border-width: 1px; border-style: none;
+                font-size: 1.8em;
+                margin-left: 5px;
+                margin-right: 5px; margin-top: 30px;
+                border-top: black solid 1px;
+                margin-bottom: 10px; padding-left: 10px; padding-top: 2px; padding-bottom: 5px; }
+
+DIV.qandadiv    { color: white; background: #5290EC;
+                border-color: black; border-width: 1px; border-style: none;
+                font-size: 1.5em;
+                margin-left: 5px;
+                margin-right: 5px; margin-top: 20px;
+                border-top: black solid 1px;
+                margin-bottom: 10px; padding-left: 10px; padding-top: 2px; padding-bottom: 5px; }
+
+DIV.question    { color: darkblue;
+                    font-size: 1.0em;
+                    margin-left: 80px;
+                    margin-right: 20px;
+                    margin-top: 20px;
+                    border-top: black solid 1px;
+                    margin-bottom: 10px; padding-left: 0px; padding-top: 2px; padding-bottom: 5px; }
+
+DIV.answer  { color: darkblue;
+                    font-size: 1.0em;
+                    margin-left: 80px;
+                    margin-right: 20px;
+                    margin-top: 20px;
+                    margin-bottom: 10px; padding-left: 0px; padding-top: 2px; padding-bottom: 5px; }
+
+
+/* admonitions */
+SPAN.caution { color: #FF0000; font-weight: bold; }
+
+DIV.caution  { background: #FFFFCC; color: black;
+            border-color: red; border-width: 1px; border-style: solid;
+            margin-left: 80px;
+            margin-right: 20px;
+            margin-bottom: 10px;
+            line-height: 125%;
+            padding: 3px;
+        }
+
+DIV.caution DIV.para,
+DIV.caution UL,
+DIV.caution OL,
+DIV.caution DIV.programlisting,
+DIV.caution DIV.literallayout,
+DIV.caution DIV.example       { margin-left: 40px; }
+
+DIV.caution UL UL,
+DIV.caution OL OL,
+DIV.caution UL OL,
+DIV.caution OL UL,
+DIV.caution LI DIV.para,
+DIV.caution LI DIV.programlisting,
+DIV.caution LI DIV.literallayout,
+DIV.caution LI DIV.example    { margin-left:  0px; }
+
+SPAN.important { color: darkblue; font-weight: bold; }
+
+DIV.important  { background: #FFFFCC; color: black;
+            border-color: black; border-width: 1px; border-style: solid;
+            margin-left: 80px;
+            margin-right: 20px;
+            margin-bottom: 10px;
+            line-height: 125%;
+            padding: 3px;
+        }
+
+DIV.important DIV.para,
+DIV.important UL,
+DIV.important OL,
+DIV.important DIV.programlisting,
+DIV.important DIV.literallayout,
+DIV.important DIV.example       { margin-left: 40px; }
+
+DIV.important UL UL,
+DIV.important OL OL,
+DIV.important UL OL,
+DIV.important OL UL,
+DIV.important LI DIV.para,
+DIV.important LI DIV.programlisting,
+DIV.important LI DIV.literallayout,
+DIV.important LI DIV.example    { margin-left:  0px; }
+SPAN.note { color: darkblue; font-weight: bold; }
+
+SPAN.question { color: darkblue; font-weight: bold; }
+SPAN.answer { color: darkblue; font-weight: bold; }
+
+DIV.note  { background: #FFFFCC; color: black;
+            border-color: black; border-width: 1px; border-style: solid;
+            margin-left: 80px;
+            margin-right: 20px;
+            margin-bottom: 10px;
+            line-height: 125%;
+            padding: 3px;
+        }
+
+DIV.note DIV.para,
+DIV.note UL,
+DIV.note OL,
+DIV.note DIV.programlisting,
+DIV.note DIV.literallayout,
+DIV.note DIV.example       { margin-left: 40px; }
+
+DIV.note UL UL,
+DIV.note OL OL,
+DIV.note UL OL,
+DIV.note OL UL,
+DIV.note LI DIV.para,
+DIV.note LI DIV.programlisting,
+DIV.note LI DIV.literallayout,
+DIV.note LI DIV.example    { margin-left:  0px; }
+
+SPAN.tip { color: darkblue; font-weight: bold; }
+
+DIV.tip  { background: #FFFFCC; color: black;
+            border-color: black; border-width: 1px; border-style: solid;
+            margin-left: 80px;
+            margin-right: 20px;
+            margin-bottom: 10px;
+            line-height: 125%;
+            padding: 3px;
+        }
+
+DIV.tip DIV.para    { margin-left: 40px; }
+
+SPAN.warning { color: #FF0000; font-weight: bold; }
+
+DIV.warning  { background: #FFFFCC; color: black;
+            border-color: red; border-width: 1px; border-style: solid;
+            margin-left: 80px;
+            margin-right: 20px;
+            margin-bottom: 10px;
+            line-height: 125%;
+            padding: 3px;
+        }
+
+DIV.warning DIV.para,
+DIV.warning UL,
+DIV.warning OL,
+DIV.warning DIV.programlisting,
+DIV.warning DIV.literallayout,
+DIV.warning DIV.example       { margin-left: 40px; }
+
+DIV.warning UL UL,
+DIV.warning OL OL,
+DIV.warning UL OL,
+DIV.warning OL UL,
+DIV.warning LI DIV.para,
+DIV.warning LI DIV.programlisting,
+DIV.warning LI DIV.literallayout,
+DIV.warning LI DIV.example    { margin-left:  0px; }
+
+
+/* figures */
+DIV.figure-title { color: darkblue;
+                    font-weight: bold;
+                    margin-top: 20px;
+                    margin-bottom: 10px;
+                    margin-left: 80px;
+                    margin-right: 20px;
+                    text-align: center;
+                }
+
+
+DIV.figure      {
+					margin-left: 80px;
+					margin-right: 20px;
+					margin-bottom: 20px;
+					text-align: center;
+         		}
+
+
+/* tables */
+DIV.table-title { color: darkblue;
+                    font-weight: bold;
+                    margin-top: 20px;
+                    margin-bottom: 10px;
+                    margin-left: 80px;
+                    margin-right: 20px;
+                    text-align: center;
+                }
+
+
+DIV.table       {
+                    margin-left: 80px;
+                    margin-right: 20px;
+                    margin-bottom: 20px;
+                    text-align: center;
+                }
+
+DIV.informaltable   {
+                    margin-left: 80px;
+                    margin-right: 20px;
+                    margin-bottom: 20px;
+                }
+
+
+/* blocks-inside-of-tables styles */
+
+/* block styles */
+
+TD  { margin-left: 0px; }
+
+TD OL   { margin-left: 0px; }
+
+TD LI   { color: black;
+                margin-left: 0px;
+                margin-right: 0px;
+               }
+
+TD DIV.para { margin-bottom: 10px;
+                line-height: 125%;
+                margin-left: 0px;
+                margin-right: 0px;
+                }
+
+OL LI DIV.para   { margin-left: 0px; }
+
+UL LI DIV.para   { margin-left: 0px; }
+
+OL LI DIV.glossentry   { margin-left: 10px; }
+ 
+UL LI DIV.glossentry   { margin-left: 10px; }
+
+TD OL LI DIV.para   { margin-left: 0px; }
+
+TD UL LI DIV.para   { margin-left: 0px; }
+
+TD LI DIV.para  { margin-left: 0px; }
+
+TD DIV.literallayout    { background: white; color: black;
+            border-color: white; border-width: 1px; border-style: solid;
+            font-family: courier new,courier,monospace;
+            text-align: left;
+            line-height: 125%;
+            margin-left: 0px;
+            margin-right: 0px;
+            margin-bottom: 10px;
+            padding-left: 10px; padding-top: 0px; padding-bottom: 0px;
+         }
+
+TD DIV.programlisting   { background: #E0E0E0; color: black;
+            border-color: black; border-width: 1px; border-style: solid;
+            font-family: courier new,courier,monospace;
+            text-align: left;
+            line-height: 125%;
+            margin-left: 0px;
+            margin-right: 0px;
+            margin-bottom: 10px;
+            padding-left: 10px; padding-top: 0px; padding-bottom: 0px;
+         }
+
+
+/* mgt portal styles */
+
+A.buttonStyleON, A.buttonStyleON:visited
+{
+	COLOR: darkblue;
+	FONT-SIZE: 12px;
+	TEXT-DECORATION: none;
+	padding-left: 2px;
+	padding-right: 2px;
+}
+
+A.buttonStyleON:hover
+{
+	COLOR: red;
+	padding-left: 2px;
+	padding-right: 2px;
+}
+.wizardlabel {
+	font-size: 0.8em;
+	color: #384492;
+	text-align: right;
+}
+.wizardltlabel {
+	font-size: 0.8em;
+	color: #384492;
+	text-align: left;
+}
+
+td.LocatorBar {
+	font-size: 0.9em;
+	color: darkblue;
+	background: #A0B088;
+	background-image: url(/csp/broker/images/locatorgradient.png);
+	background-repeat: repeat-x;
+	border-bottom: 1px darkblue solid;
+	padding-bottom: 1px;
+}
+
+DIV.Locator {
+	font-weight: normal;
+	color: darkblue;
+	text-decoration: none;
+}
+
+DIV.Locator A {
+	color: darkblue;
+	text-decoration: none;
+	padding-right: 1px;
+	padding-left: 1px;
+}
+
+DIV.Locator A:visited {
+	color: darkblue;
+}
+
+DIV.Locator A:hover {
+	color: red;
+	background: #FFFAE7;
+}
+
+/* next/previous arrows */
+A.navArrows, .navArrowsDisabled
+{
+	color: darkblue;
+	FONT-SIZE: 15pt;
+	font-weight: bold;
+	TEXT-DECORATION: none;
+	padding-left: 2px;
+	padding-right: 2px;
+}
+
+.navArrowsDisabled
+{
+	color: silver;
+}
+
+a.navArrows:visited
+{
+	color: darkblue;
+	TEXT-DECORATION: none;
+	padding-left: 2px;
+	padding-right: 2px;
+}
+a.navArrows:hover
+{
+	color: red;
+	padding-left: 2px;
+	padding-right: 2px;
+    
+}
+
