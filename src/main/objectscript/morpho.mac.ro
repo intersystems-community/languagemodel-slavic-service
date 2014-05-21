@@ -1,6 +1,6 @@
 Cache for UNIX^MAC^WNS^^~Format=Cache.S~^UTF8
-%RO on 21 Май 2014 04:13:05PM
-morpho^MAC^^60821,57389^0
+%RO on 21 Май 2014 04:31:59PM
+morpho^MAC^^63328,59436.706821^0
 morpho ; Примеры работы с %Text.Russian (загрузка словаря, загрузка документов)
 #include ft
 #include %occStatus
@@ -25,80 +25,80 @@ ftload(init,folder) ; init#2 - перезагружает словари ; init\
 			 ; folder - каталог, где хранятся файл словаря morphs.mrd и тексты для загрузки в ft.doc
 			 ;
 			 ; NB! ^CacheTempMorpho стирается перед прогоном всегда! (он заполняется, если #%Text.Russian.DEBUG=1)
-	i $g(folder)="" w !,"Каталог для загрузки словаря и/или текстов не задан" q
-	s:$e(folder,$l(folder))'="\" folder=folder_"\"
-	k ^CacheTempMorpho ;($j)
-	if $g(init)#2 {
-		s rc=##class(%Text.Russian).DropDictionary()
-		i rc s rc=##class(%Text.Russian).LoadDict(folder_"morphs.mrd") ;именно в таком порядке! ;AM01
-		i rc s rc=##class(%Text.Russian).ExcludeCommonTerms(1000)
-		k ^DictNew
-		i 'rc g fterrex
-		w !,"Словари загружены"
+	if $get(folder)="" write !,"Каталог для загрузки словаря и/или текстов не задан" quit
+	set:$extract(folder,$length(folder))'="\" folder=folder_"\"
+	kill ^CacheTempMorpho ;($j)
+	if $get(init)#2 {
+		set rc=##class(%Text.Russian).DropDictionary()
+		if rc set rc=##class(%Text.Russian).LoadDict(folder_"morphs.mrd") ;именно в таком порядке! ;AM01
+		if rc set rc=##class(%Text.Russian).ExcludeCommonTerms(1000)
+		kill ^DictNew
+		if 'rc goto fterrex
+		write !,"Словари загружены"
 	}
-	if $g(init)\2#2 {
-		s rc=##class(ft.doc).%KillExtent() i 'rc g fterrex
-		w !,"Хранилище документов очищено"
+	if $get(init)\2#2 {
+		set rc=##class(ft.doc).%KillExtent() if 'rc goto fterrex
+		write !,"Хранилище документов очищено"
 	}
-	d $zu(68,40,1)
-	s t0=$zh,bc=0,mask=folder_"*.txt"
-	f  s file=$zsearch(mask) s mask="" q:file=""  s rc=$$ftpar(file) i 'rc u $p w !,rc q
-	s dt=$zh-t0 u $p w !,$g(bc)/1024," kChars; ",dt," sec; " i $g(bc)>0 w $j(bc/dt/1024,10,2)," kChars/sec"
+	do $zutil(68,40,1)
+	set t0=$zhorolog,bc=0,mask=folder_"*.txt"
+	for  set file=$zsearch(mask) set mask="" quit:file=""  set rc=$$ftpar(file) if 'rc use $principal write !,rc quit
+	set dt=$zhorolog-t0 use $principal write !,$get(bc)/1024," kChars; ",dt," sec; " if $get(bc)>0 write $justify(bc/dt/1024,10,2)," kChars/sec"
 fterrex
-	i 'rc { d $system.OBJ.DisplayError(rc) } 
-	q 
+	if 'rc { do $system.OBJ.DisplayError(rc) } 
+	quit 
  
  
 ftpar(file) ; read per paragraph (myMAXLEN max size) ; global bc
-	n line1
-	c file o file:("RK\CP1251\"):0 e  q "0~not opened"
-	u $p w !,file ;r *a
-	u file
-	u file s tag=0, maxlen=0
-	k line1
-	s text="",npar=1,eop=1
-	s doc=##class(ft.doc).%New(),doc.myTitle=file,doc.myPar=npar
+	new line1
+	close file open file:("RK\CP1251\"):0 else  quit "0~not opened"
+	use $principal write !,file ;r *a
+	use file
+	use file set tag=0, maxlen=0
+	kill line1
+	set text="",npar=1,eop=1
+	set doc=##class(ft.doc).%New(),doc.myTitle=file,doc.myPar=npar
 	for {
-		s line=$$ftpline(.eop)
+		set line=$$ftpline(.eop)
 		while line'="" {
-			if $l(text)+$l(line)<=$$$myMAXLEN  { s text=text_" "_line, line="" }
-			else { s text=text_$e(line,1,$$$myMAXLEN-$l(text)), line=$e(line,$$$myMAXLEN-$l(text)+1,$l(line)), eop=1 }
+			if $length(text)+$length(line)<=$$$myMAXLEN  { set text=text_" "_line, line="" }
+			else { set text=text_$extract(line,1,$$$myMAXLEN-$length(text)), line=$extract(line,$$$myMAXLEN-$length(text)+1,$length(line)), eop=1 }
 			if eop || (line'="") {
-				s doc.myDocument=text s rc=doc.%Save()
+				set doc.myDocument=text set rc=doc.%Save()
 				#; u $p w !,text r *a u file ;de!
-				s npar=npar+1,bc=bc+$l(text),text="" q:'rc
-				s doc=##class(ft.doc).%New(),doc.myTitle=file,doc.myPar=npar
+				set npar=npar+1,bc=bc+$length(text),text="" quit:'rc
+				set doc=##class(ft.doc).%New(),doc.myTitle=file,doc.myPar=npar
 			}
 		}
-		s rc=1
-		q:$zeof
+		set rc=1
+		quit:$zeof
 	}
-	s doc=""
-	c file
-	q rc
+	set doc=""
+	close file
+	quit rc
  
 ftpline(eop)
-	s eop=1,line=""
-	if $g(line1)="" {
+	set eop=1,line=""
+	if $get(line1)="" {
 	  do {
-		r line1
-		g:$zeof ftplex
+		read line1
+		goto:$zeof ftplex
 	  } while line1=""
 	}
-	s line=line1 ;s maxlen=$s($l(line)>maxlen:$l(line),1:maxlen)
-	r line1	g:$zeof ftplex
-	if line1="" { s eop=1 }
-	elseif $e(line1,1,4)=$c(32,32,32,32) { s eop=1 }
-	else { s eop=0 }
+	set line=line1 ;s maxlen=$s($l(line)>maxlen:$l(line),1:maxlen)
+	read line1	goto:$zeof ftplex
+	if line1="" { set eop=1 }
+	elseif $extract(line1,1,4)=$char(32,32,32,32) { set eop=1 }
+	else { set eop=0 }
 	if eop {
-		s endch=$e(line,*)
-		i endch="""" s endch=$e(line,*-1) i endch=" " s line=$zu(28,$e(line,1,*-1),8),$e(line,1)="",endch=$e(line,*),line=line_""""
-		i endch=" " s line=$zu(28,line,8),$e(line,1)="",endch=$e(line,*)
-		s eop=$s(endch=".":1,endch="?":1,endch="!":1,endch=":":1,1:0)
+		set endch=$extract(line,*)
+		if endch="""" set endch=$extract(line,*-1) if endch=" " set line=$zutil(28,$extract(line,1,*-1),8),$extract(line,1)="",endch=$extract(line,*),line=line_""""
+		if endch=" " set line=$zutil(28,line,8),$extract(line,1)="",endch=$extract(line,*)
+		set eop=$select(endch=".":1,endch="?":1,endch="!":1,endch=":":1,1:0)
 	}
-	s:'eop&&(endch'="-") line=line_" "
+	set:'eop&&(endch'="-") line=line_" "
 ftplex
-	q line
+	quit line
  
  
 

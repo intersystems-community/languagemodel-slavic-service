@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Export generator="Cache" version="25" zv="Cache for UNIX (Apple Mac OS X for x86-64) 2014.2 (Build 240U)" ts="2014-05-21 16:05:23">
+<Export generator="Cache" version="25" zv="Cache for UNIX (Apple Mac OS X for x86-64) 2014.2 (Build 240U)" ts="2014-05-21 16:30:58">
 <Class name="%Text.Russian">
 <Description><![CDATA[
 See <CLASS>%Text.Text</CLASS>
@@ -9,7 +9,7 @@ initializes the language-specific list of noise words and loads Russian morpholo
 <p class=MsoNormal>© Н.А.Шестакова, 2007 </p>
 ]]></Description>
 <Super>%Text.Text</Super>
-<TimeChanged>63328,57902.567772</TimeChanged>
+<TimeChanged>63328,59403.533323</TimeChanged>
 <TimeCreated>60696,37781.22329</TimeCreated>
 
 <Parameter name="DEBUG">
@@ -65,11 +65,11 @@ SELECT myDocument, myTitle, myPar FROM ft.doc where myDocument %CONTAINSTERM ('�
 <ReturnType>%String</ReturnType>
 <Implementation><![CDATA[
 #; лемматизируем только кириллицу (возможно с дефисами)!
-	if ($l(b)<..#MINWORDLEN) || ($tr(b,"абвгдежзийклмнопрстуфхцчшщъыьэюяё-")'="") set lb=$lb(b) quit b
+	if ($length(b)<..#MINWORDLEN) || ($translate(b,"абвгдежзийклмнопрстуфхцчшщъыьэюяё-")'="") set lb=$listbuild(b) quit b
 	set lem=""
 	set lb=""
-	set k=$l(b) 
-	set b=$tr(b, "ё", "е") ;меняем ё на е
+	set k=$length(b) 
+	set b=$translate(b, "ё", "е") ;меняем ё на е
 	#; Проверяем наличие слова в словаре
 	if $data(^Dict(b)) {
     	for {
@@ -79,14 +79,14 @@ SELECT myDocument, myTitle, myPar FROM ft.doc where myDocument %CONTAINSTERM ('�
     		}
 		}	
 	#; Обработка слов с дефисом
-	elseif $l(b, "-")>1 {
-		s:($data(^Dict($piece(b, "-", 1)_$piece(b, "-", 2, $l(b, "-"))))) b=..stemWord($piece(b, "-", 1)_$piece(b, "-", 2, $l(b, "-")), .lb)
+	elseif $length(b, "-")>1 {
+		set:($data(^Dict($piece(b, "-", 1)_$piece(b, "-", 2, $length(b, "-"))))) b=..stemWord($piece(b, "-", 1)_$piece(b, "-", 2, $length(b, "-")), .lb)
 		quit:(lb'="") b
 		set lpart=..stemWord($piece(b, "-", 1), .lp)
-		set rpart=..stemWord($piece(b, "-", 2, $l(b, "-")), .rp)
-		for i=1:1:$ll(lp) {
-			for j=1:1:$ll(rp) {
-				set lb=lb_$lb($list(lp, i)_"-"_$list(rp, j))
+		set rpart=..stemWord($piece(b, "-", 2, $length(b, "-")), .rp)
+		for i=1:1:$listlength(lp) {
+			for j=1:1:$listlength(rp) {
+				set lb=lb_$listbuild($list(lp, i)_"-"_$list(rp, j))
 				}			
 			}
 		}
@@ -96,7 +96,7 @@ SELECT myDocument, myTitle, myPar FROM ft.doc where myDocument %CONTAINSTERM ('�
 		}
 
     #;set b=lb ; выдаём список лемм для данной словоформы
-	set b=$list(lb, $ll(lb)) ;выдаём последнюю лемму из списка
+	set b=$list(lb, $listlength(lb)) ;выдаём последнюю лемму из списка
 	quit b
 ]]></Implementation>
 </Method>
@@ -112,26 +112,26 @@ SELECT myDocument, myTitle, myPar FROM ft.doc where myDocument %CONTAINSTERM ('�
 	set lb=..Normalword(b)
 	if lb="" {
 		set lem=""
-		set k=$l(b)
+		set k=$length(b)
 		set sc=0 
 		for i=2:1:k { ;отсекаем от слова пошагово по букве с начала
 			if (i=k-1)&&(sc=0)&&(..ends(b, k, 2, "ой", .j)) {
-				set lb=lb_$lb($e(b, 1, j))
+				set lb=lb_$listbuild($extract(b, 1, j))
 				set sc=1
 				}
 			if (i=k)&&(sc=0)&&(..ends(b, k, 1, "о", .j)) {
-				set lb=lb_$lb(b)
+				set lb=lb_$listbuild(b)
 				set sc=1
 				}
 			quit:(sc=1)
-			set stemend=$e(b, i-1, i-1)
+			set stemend=$extract(b, i-1, i-1)
 			if ..cons(stemend)=1 {
 				set cons="cons"
 				}
 			elseif ..cons(stemend)=0 {
 				set cons="vow"
 				}	
-			set psfl=$e(b, i, k)
+			set psfl=$extract(b, i, k)
 			if $data(^Predict(cons, psfl))=10 {
 				for {
 					set lem=$order(^Predict(cons, psfl, lem))
@@ -140,13 +140,13 @@ SELECT myDocument, myTitle, myPar FROM ft.doc where myDocument %CONTAINSTERM ('�
 					if fl="#" {
 						set fl=""
 						}
-					set lb=lb_$lb($e(b, 1, i-1)_fl)
+					set lb=lb_$listbuild($extract(b, 1, i-1)_fl)
 					}
 				set sc=1					
 				}
 			}
 		if (sc=0) { // окончание пустое! // &&(..ends(b, k, 0, "",.j)) {
-			set lb=lb_$lb(b)
+			set lb=lb_$listbuild(b)
 			}
 		}
 
@@ -181,139 +181,139 @@ SELECT myDocument, myTitle, myPar FROM ft.doc where myDocument %CONTAINSTERM ('�
 <Implementation><![CDATA[
 	set lem=""
 	set lb=""
-	set k=$l(b)
+	set k=$length(b)
 	set j=""
-	if (($e(b, 1, 2)="не")||($e(b, 1, 2)="ре")||($e(b, 1, 2)="за")||($e(b, 1, 2)="до")||($e(b, 1, 2)="де")||($e(b, 1, 2)="по"))&&(k'=2)&&(($data(^Dict($e(b, 3, k))))) {
+	if (($extract(b, 1, 2)="не")||($extract(b, 1, 2)="ре")||($extract(b, 1, 2)="за")||($extract(b, 1, 2)="до")||($extract(b, 1, 2)="де")||($extract(b, 1, 2)="по"))&&(k'=2)&&(($data(^Dict($extract(b, 3, k))))) {
 	    for {
-    		set lem=$order(^Dict($e(b, 3, k), lem))
+    		set lem=$order(^Dict($extract(b, 3, k), lem))
     		quit:(lem="")
-    		set lb=lb_$listbuild($e(b, 1, 2)_$get(^Lemma(lem)))
+    		set lb=lb_$listbuild($extract(b, 1, 2)_$get(^Lemma(lem)))
     		}
     	set b=lb	
 	    quit b
 	}
-	if (($e(b, 1, 3)="суб")||($e(b, 1, 3)="нео")||($e(b, 1, 3)="без")||($e(b, 1, 3)="меж")||($e(b, 1, 3)="дез")||($e(b, 1, 3)="пан")||($e(b, 1, 3)="пра")||($e(b, 1, 3)="все")||($e(b, 1, 3)="вне")||($e(b, 1, 3)="дис")||($e(b, 1, 3)="бес")||($e(b, 1, 3)="дву"))&&(k'=3)&&(($data(^Dict($e(b, 4, k))))) {
+	if (($extract(b, 1, 3)="суб")||($extract(b, 1, 3)="нео")||($extract(b, 1, 3)="без")||($extract(b, 1, 3)="меж")||($extract(b, 1, 3)="дез")||($extract(b, 1, 3)="пан")||($extract(b, 1, 3)="пра")||($extract(b, 1, 3)="все")||($extract(b, 1, 3)="вне")||($extract(b, 1, 3)="дис")||($extract(b, 1, 3)="бес")||($extract(b, 1, 3)="дву"))&&(k'=3)&&(($data(^Dict($extract(b, 4, k))))) {
 	    for {
-    		set lem=$order(^Dict($e(b, 4, k), lem))
+    		set lem=$order(^Dict($extract(b, 4, k), lem))
     		quit:(lem="")
-    		set lb=lb_$listbuild($e(b, 1, 3)_$get(^Lemma(lem)))
+    		set lb=lb_$listbuild($extract(b, 1, 3)_$get(^Lemma(lem)))
     		}
     	set b=lb	
 	    quit b
 	}
-	if (($e(b, 1, 4)="анти")||($e(b, 1, 4)="обще")||($e(b, 1, 4)="пост")||($e(b, 1, 4)="пред")||($e(b, 1, 4)="полу")||($e(b, 1, 4)="пере")||($e(b, 1, 4)="само")||($e(b, 1, 4)="поли")||($e(b, 1, 4)="одно")||($e(b, 1, 4)="архи")||($e(b, 1, 4)="пара")||($e(b, 1, 4)="недо")||($e(b, 1, 4)="мета")||($e(b, 1, 4)="мало")||($e(b, 1, 4)="мини")||($e(b, 1, 4)="гипо")||($e(b, 1, 4)="двух")||($e(b, 1, 4)="грам")||($e(b, 1, 4)="пери"))&&(k'=4)&&(($data(^Dict($e(b, 5, k))))) {
+	if (($extract(b, 1, 4)="анти")||($extract(b, 1, 4)="обще")||($extract(b, 1, 4)="пост")||($extract(b, 1, 4)="пред")||($extract(b, 1, 4)="полу")||($extract(b, 1, 4)="пере")||($extract(b, 1, 4)="само")||($extract(b, 1, 4)="поли")||($extract(b, 1, 4)="одно")||($extract(b, 1, 4)="архи")||($extract(b, 1, 4)="пара")||($extract(b, 1, 4)="недо")||($extract(b, 1, 4)="мета")||($extract(b, 1, 4)="мало")||($extract(b, 1, 4)="мини")||($extract(b, 1, 4)="гипо")||($extract(b, 1, 4)="двух")||($extract(b, 1, 4)="грам")||($extract(b, 1, 4)="пери"))&&(k'=4)&&(($data(^Dict($extract(b, 5, k))))) {
 	    for {
-    		set lem=$order(^Dict($e(b, 5, k), lem))
+    		set lem=$order(^Dict($extract(b, 5, k), lem))
     		quit:(lem="")
-    		set lb=lb_$listbuild($e(b, 1, 4)_$get(^Lemma(lem)))
+    		set lb=lb_$listbuild($extract(b, 1, 4)_$get(^Lemma(lem)))
     		}
     	set b=lb
 	    quit b
 	}
-	if (($e(b, 1, 5)="после")||($e(b, 1, 5)="небез")||($e(b, 1, 5)="микро")||($e(b, 1, 5)="контр")||($e(b, 1, 5)="сверх")||($e(b, 1, 5)="квази")||($e(b, 1, 5)="супер")||($e(b, 1, 5)="много")||($e(b, 1, 5)="макро")||($e(b, 1, 5)="гипер")||($e(b, 1, 5)="разно")||($e(b, 1, 5)="около")||($e(b, 1, 5)="низко")||($e(b, 1, 5)="интер"))&&(k'=5)&&(($data(^Dict($e(b, 6, k))))) {
+	if (($extract(b, 1, 5)="после")||($extract(b, 1, 5)="небез")||($extract(b, 1, 5)="микро")||($extract(b, 1, 5)="контр")||($extract(b, 1, 5)="сверх")||($extract(b, 1, 5)="квази")||($extract(b, 1, 5)="супер")||($extract(b, 1, 5)="много")||($extract(b, 1, 5)="макро")||($extract(b, 1, 5)="гипер")||($extract(b, 1, 5)="разно")||($extract(b, 1, 5)="около")||($extract(b, 1, 5)="низко")||($extract(b, 1, 5)="интер"))&&(k'=5)&&(($data(^Dict($extract(b, 6, k))))) {
 	    for {
-    		set lem=$order(^Dict($e(b, 6, k), lem))
+    		set lem=$order(^Dict($extract(b, 6, k), lem))
     		quit:(lem="")
-    		set lb=lb_$listbuild($e(b, 1, 5)_$get(^Lemma(lem)))
+    		set lb=lb_$listbuild($extract(b, 1, 5)_$get(^Lemma(lem)))
     		}
     	set b=lb
 	    quit b
 	}
-	if (($e(b,1,6)="псевдо")||($e(b,1,6)="ультра")||($e(b,1,6)="внутри")||($e(b,1,6)="экстра")||($e(b,1,6)="мульти")||($e(b,1,6)="энтеро"))&&(k'=6)&&(($data(^Dict($e(b, 7, k))))) {
+	if (($extract(b,1,6)="псевдо")||($extract(b,1,6)="ультра")||($extract(b,1,6)="внутри")||($extract(b,1,6)="экстра")||($extract(b,1,6)="мульти")||($extract(b,1,6)="энтеро"))&&(k'=6)&&(($data(^Dict($extract(b, 7, k))))) {
 	    for {
-    		set lem=$order(^Dict($e(b, 7, k), lem))
+    		set lem=$order(^Dict($extract(b, 7, k), lem))
     		quit:(lem="")
-    		set lb=lb_$listbuild($e(b, 1, 6)_$get(^Lemma(lem)))
+    		set lb=lb_$listbuild($extract(b, 1, 6)_$get(^Lemma(lem)))
     		}
     	set b=lb
 	    quit b
 	}
-	if ($e(b,1,7)="противо")&&(k'=7)&&(($data(^Dict($e(b, 8, k))))) {
+	if ($extract(b,1,7)="противо")&&(k'=7)&&(($data(^Dict($extract(b, 8, k))))) {
 		for {
-    		set lem=$order(^Dict($e(b, 8, k), lem))
+    		set lem=$order(^Dict($extract(b, 8, k), lem))
     		quit:(lem="")
-    		set lb=lb_$listbuild($e(b, 1, 7)_$get(^Lemma(lem)))
+    		set lb=lb_$listbuild($extract(b, 1, 7)_$get(^Lemma(lem)))
     		}
     	set b=lb
 	    quit b
 	}
 	if ..ends(b, k, 4, "ость", .j)||..ends(b, k, 4, "ости", .j)||..ends(b, k, 5, "остью", .j)||..ends(b, k, 5, "остей", .j)||..ends(b, k, 5, "остям", .j)||..ends(b, k, 6, "остями", .j)||..ends(b, k, 5, "остях", .j) {
-		set b=lb_$lb($e(b, 1, j)_"ость")
+		set b=lb_$listbuild($extract(b, 1, j)_"ость")
 		quit b
 	}
 	if ..ends(b, k, 4, "тель", .j)||..ends(b, k, 4, "теля", .j)||..ends(b, k, 4, "телю", .j)||..ends(b, k, 5, "телем", .j)||..ends(b, k, 4, "теле", .j)||..ends(b, k, 4, "тели", .j)||..ends(b, k, 5, "телей", .j)||..ends(b, k, 5, "телям", .j)||..ends(b, k, 6, "телями", .j)||..ends(b, k, 5, "телях", .j) {
-		set b=lb_$lb($e(b, 1, j)_"тель")
+		set b=lb_$listbuild($extract(b, 1, j)_"тель")
 		quit b
 	}
 	if ..ends(b, k, 4, "ство", .j)||..ends(b, k, 4, "ства", .j)||..ends(b, k, 4, "ству", .j)||..ends(b, k, 5, "ством", .j)||..ends(b, k, 4, "стве", .j)||..ends(b, k, 4, "ства", .j)||..ends(b, k, 3, "ств", .j)||..ends(b, k, 5, "ствам", .j)||..ends(b, k, 6, "ствами", .j)||..ends(b, k, 5, "ствах", .j) {
-		set b=lb_$lb($e(b, 1, j)_"ство")
+		set b=lb_$listbuild($extract(b, 1, j)_"ство")
 		quit b
 	}
 	if ..ends(b, k, 2, "ий", .j)||..ends(b, k, 3, "ого", .j)||..ends(b, k, 3, "ому", .j)||..ends(b, k, 2, "им", .j)||..ends(b, k, 2, "ом", .j)||..ends(b, k, 2, "ое", .j)||..ends(b, k, 2, "ая", .j)||..ends(b, k, 2, "ой", .j)||..ends(b, k, 2, "ую", .j)||..ends(b, k, 2, "ие", .j)||..ends(b, k, 2, "их", .j)||..ends(b, k, 2, "им", .j)||..ends(b, k, 3, "ими", .j) {
-		if ($e(b, j)="к") {
-		    set b=lb_$lb($e(b, 1, j)_"ий")
+		if ($extract(b, j)="к") {
+		    set b=lb_$listbuild($extract(b, 1, j)_"ий")
 		    quit b
 		}
 	}
 	if ..ends(b, k, 2, "ий", .j)||..ends(b, k, 3, "его", .j)||..ends(b, k, 3, "ему", .j)||..ends(b, k, 2, "им", .j)||..ends(b, k, 2, "ем", .j)||..ends(b, k, 2, "ее", .j)||..ends(b, k, 2, "ая", .j)||..ends(b, k, 2, "ей", .j)||..ends(b, k, 2, "ую", .j)||..ends(b, k, 2, "ие", .j)||..ends(b, k, 2, "их", .j)||..ends(b, k, 2, "им", .j)||..ends(b, k, 3, "ими", .j) {
-		if ($e(b, j-1, j)="ющ")||($e(b, j-1, j)="ящ")||($e(b, j-1, j)="ущ")||($e(b, j-1, j)="ащ") {
-		    set b=lb_$lb($e(b, 1, j)_"ий")
+		if ($extract(b, j-1, j)="ющ")||($extract(b, j-1, j)="ящ")||($extract(b, j-1, j)="ущ")||($extract(b, j-1, j)="ащ") {
+		    set b=lb_$listbuild($extract(b, 1, j)_"ий")
 		    quit b
 		}
 	}
 	if ..ends(b, k, 2, "ия", .j)||..ends(b, k, 2, "ии", .j)||..ends(b, k, 2, "ию", .j)||..ends(b, k, 3, "ией", .j)||..ends(b, k, 2, "ий", .j)||..ends(b, k, 3, "иям", .j)||..ends(b, k, 4, "иями", .j)||..ends(b, k, 3, "иях", .j)||..ends(b, k, 2, "ие", .j)||..ends(b, k, 3, "ием", .j) {
-		if ($e(b,j-2, j)="фоб")||($e(b, j)="г")||($e(b,j-1, j)="ид")||($e(b, j)="з")||($e(b, j)="к")||($e(b,j-2, j)="фил")||($e(b, j)="м")||($e(b,j-2, j)="ман")||($e(b,j-1, j)="оп")||($e(b,j-5, j)="бактер")||($e(b,j-3, j)="метр")||($e(b,j-1, j)="ур")||($e(b, j)="с")||($e(b, j-2,j)="пат")||($e(b,j-3, j)="дент")||($e(b, j)="ф")||($e(b, j)="х")||($e(b, j)="ц") {
-		    set b=lb_$lb($e(b, 1, j)_"ия")
+		if ($extract(b,j-2, j)="фоб")||($extract(b, j)="г")||($extract(b,j-1, j)="ид")||($extract(b, j)="з")||($extract(b, j)="к")||($extract(b,j-2, j)="фил")||($extract(b, j)="м")||($extract(b,j-2, j)="ман")||($extract(b,j-1, j)="оп")||($extract(b,j-5, j)="бактер")||($extract(b,j-3, j)="метр")||($extract(b,j-1, j)="ур")||($extract(b, j)="с")||($extract(b, j-2,j)="пат")||($extract(b,j-3, j)="дент")||($extract(b, j)="ф")||($extract(b, j)="х")||($extract(b, j)="ц") {
+		    set b=lb_$listbuild($extract(b, 1, j)_"ия")
 		    quit b
 			}
-		if ($e(b,j-1, j)="ан")||($e(b, j-1, j)="ен")||($e(b, j-2, j)="ств") {
-			set b=lb_$lb($e(b, 1, j)_"ие")
+		if ($extract(b,j-1, j)="ан")||($extract(b, j-1, j)="ен")||($extract(b, j-2, j)="ств") {
+			set b=lb_$listbuild($extract(b, 1, j)_"ие")
 			quit b
 			}
 		else {
-			set b=lb_$lb($e(b, 1, j)_"ия")
+			set b=lb_$listbuild($extract(b, 1, j)_"ия")
 			quit b
 		}
 	}
 	if ..ends(b, k, 1, "а", .j)||..ends(b, k, 2, "ом", .j)||..ends(b, k, 1, "е", .j)||..ends(b, k, 1, "ы", .j)||..ends(b, k, 2, "ов", .j)||..ends(b, k, 2, "ам", .j)||..ends(b, k, 3, "ами", .j)||..ends(b, k, 2, "ах", .j)||..ends(b, k, 2, "ой", .j)||..ends(b, k, 2, "ей", .j) {
-		if ($e(b, j-1, j)="ид")||($e(b, j-1, j)="аз")||($e(b, j-1, j)="ез")||($e(b, j-1, j)="оз")||($e(b, j-1, j)="ал")||($e(b, j-1, j)="ил")||($e(b, j-1, j)="ол")||($e(b, j-2, j)="изм")||($e(b, j-1, j)="ан")||($e(b, j-1, j)="ен")||($e(b, j-2, j)="ген")||($e(b, j-1, j)="ин")||($e(b, j-4, j)="штейн")||($e(b, j-1, j)="он")||($e(b, j-2, j)="сон")||($e(b, j-3, j)="скоп")||($e(b, j-1, j)="ер")||($e(b, j-2, j)="тор")||($e(b, j-1, j)="ат")||($e(b, j-1, j)="ит")||($e(b, j-2, j)="ист") {
+		if ($extract(b, j-1, j)="ид")||($extract(b, j-1, j)="аз")||($extract(b, j-1, j)="ез")||($extract(b, j-1, j)="оз")||($extract(b, j-1, j)="ал")||($extract(b, j-1, j)="ил")||($extract(b, j-1, j)="ол")||($extract(b, j-2, j)="изм")||($extract(b, j-1, j)="ан")||($extract(b, j-1, j)="ен")||($extract(b, j-2, j)="ген")||($extract(b, j-1, j)="ин")||($extract(b, j-4, j)="штейн")||($extract(b, j-1, j)="он")||($extract(b, j-2, j)="сон")||($extract(b, j-3, j)="скоп")||($extract(b, j-1, j)="ер")||($extract(b, j-2, j)="тор")||($extract(b, j-1, j)="ат")||($extract(b, j-1, j)="ит")||($extract(b, j-2, j)="ист") {
 		#;if ($e(b, j-1, j)="ид")||($e(b, j-1, j)="аз")||($e(b, j-1, j)="ёз")||($e(b, j-1, j)="ез")||($e(b, j-1, j)="оз")||($e(b, j-1, j)="ал")||($e(b, j-1, j)="ил")||($e(b, j-1, j)="ол")||($e(b, j-2, j)="изм")||($e(b, j-1, j)="ан")||($e(b, j-1, j)="ен")||($e(b, j-2, j)="ген")||($e(b, j-1, j)="ин")||($e(b, j-4, j)="штейн")||($e(b, j-1, j)="он")||($e(b, j-2, j)="сон")||($e(b, j-3, j)="скоп")||($e(b, j-1, j)="ер")||($e(b, j-1, j)="ёр")||($e(b, j-2, j)="тор")||($e(b, j-1, j)="ат")||($e(b, j-1, j)="ит")||($e(b, j-2, j)="ист") {
-			set b=lb_$lb($e(b, 1, j))
+			set b=lb_$listbuild($extract(b, 1, j))
 			quit b
 		}
-		if ($e(b,j-1,j)="ом")||($e(b,j-1,j)="ем")||($e(b,j-2,j)="азм")||($e(b, j-4, j)="грамм")||($e(b,j-1,j)="иц") {
+		if ($extract(b,j-1,j)="ом")||($extract(b,j-1,j)="ем")||($extract(b,j-2,j)="азм")||($extract(b, j-4, j)="грамм")||($extract(b,j-1,j)="иц") {
 		#;if ($e(b,j-1,j)="ом")||($e(b,j-1,j)="ём")||($e(b,j-1,j)="ем")||($e(b,j-2,j)="азм")||($e(b, j-4, j)="грамм")||($e(b,j-1,j)="иц") {			
-			set b=lb_$lb($e(b, 1, j)_"а")
+			set b=lb_$listbuild($extract(b, 1, j)_"а")
 			quit b
 		}
 	}
 	if ..ends(b, k, 1, "а", .j)||..ends(b, k, 2, "ом", .j)||..ends(b, k, 1, "е", .j)||..ends(b, k, 2, "ов", .j)||..ends(b, k, 2, "ам", .j)||..ends(b, k, 3, "ами", .j)||..ends(b, k, 2, "ах", .j)||..ends(b, k, 2, "ой", .j)||..ends(b, k, 2, "ей", .j)||..ends(b, k, 1, "и",.j) {
-		if ($e(b, j-2, j)="инг")||($e(b, j-3, j)="берг")||($e(b, j-1, j)="ик") {
-			set b=lb_$lb($e(b, 1, j))
+		if ($extract(b, j-2, j)="инг")||($extract(b, j-3, j)="берг")||($extract(b, j-1, j)="ик") {
+			set b=lb_$listbuild($extract(b, 1, j))
 			quit b
 		}
 	}
 	if ..ends(b, k, 2, "ея", .j)||..ends(b, k, 2, "еи", .j)||..ends(b, k, 2, "ею", .j)||..ends(b, k, 3, "еей", .j)||..ends(b, k, 2, "ей", .j)||..ends(b, k, 3, "еям", .j)||..ends(b, k, 4, "еями", .j)||..ends(b, k, 3, "еях", .j)||..ends(b, k, 2, "ее", .j) {
-		if ($e(b, j)="р") {
-		    set b=lb_$lb($e(b, 1, j)_"ея")
+		if ($extract(b, j)="р") {
+		    set b=lb_$listbuild($extract(b, 1, j)_"ея")
 		    quit b
 		}
 	}
 	if ..ends(b, k, 2, "ый", .j)||..ends(b, k, 3, "ого", .j)||..ends(b, k, 3, "ому", .j)||..ends(b, k, 2, "ым", .j)||..ends(b, k, 2, "ом", .j)||..ends(b, k, 2, "ое", .j)||..ends(b, k, 2, "ая", .j)||..ends(b, k, 2, "ой", .j)||..ends(b, k, 2, "ую", .j)||..ends(b, k, 2, "ые", .j)||..ends(b, k, 2, "ых", .j)||..ends(b, k, 2, "ым", .j)||..ends(b, k, 3, "ыми", .j) {
-		if ($e(b, j-1,j)="ов")||($e(b, j)="н")||($e(b, j-2,j)="ист") {
-		    set b=lb_$lb($e(b, 1, j)_"ый")
+		if ($extract(b, j-1,j)="ов")||($extract(b, j)="н")||($extract(b, j-2,j)="ист") {
+		    set b=lb_$listbuild($extract(b, 1, j)_"ый")
 		    quit b
 		}
 	}
 	if ..ends(b, k, 1, "у", .j)||..ends(b, k, 0, "",.j) {
-		if ($e(b, j-2, j)="инг")||($e(b, j-3, j)="берг")||($e(b, j-1, j)="ид")||($e(b, j-1, j)="аз")||($e(b, j-1, j)="ез")||($e(b, j-1, j)="оз")||($e(b, j-1, j)="ик")||($e(b, j-1, j)="ал")||($e(b, j-1, j)="ил")||($e(b, j-1, j)="ол")||($e(b, j-2, j)="изм")||($e(b, j-1, j)="ан")||($e(b, j-1, j)="ен")||($e(b, j-2, j)="ген")||($e(b, j-1, j)="ин")||($e(b, j-4, j)="штейн")||($e(b, j-1, j)="он")||($e(b, j-2, j)="сон")||($e(b, j-3, j)="скоп")||($e(b, j-1, j)="ер")||($e(b, j-2, j)="тор")||($e(b, j-1, j)="ат")||($e(b, j-1, j)="ит")||($e(b, j-2, j)="ист") {
+		if ($extract(b, j-2, j)="инг")||($extract(b, j-3, j)="берг")||($extract(b, j-1, j)="ид")||($extract(b, j-1, j)="аз")||($extract(b, j-1, j)="ез")||($extract(b, j-1, j)="оз")||($extract(b, j-1, j)="ик")||($extract(b, j-1, j)="ал")||($extract(b, j-1, j)="ил")||($extract(b, j-1, j)="ол")||($extract(b, j-2, j)="изм")||($extract(b, j-1, j)="ан")||($extract(b, j-1, j)="ен")||($extract(b, j-2, j)="ген")||($extract(b, j-1, j)="ин")||($extract(b, j-4, j)="штейн")||($extract(b, j-1, j)="он")||($extract(b, j-2, j)="сон")||($extract(b, j-3, j)="скоп")||($extract(b, j-1, j)="ер")||($extract(b, j-2, j)="тор")||($extract(b, j-1, j)="ат")||($extract(b, j-1, j)="ит")||($extract(b, j-2, j)="ист") {
 		#;if ($e(b, j-2, j)="инг")||($e(b, j-3, j)="берг")||($e(b, j-1, j)="ид")||($e(b, j-1, j)="аз")||($e(b, j-1, j)="ёз")||($e(b, j-1, j)="ез")||($e(b, j-1, j)="оз")||($e(b, j-1, j)="ик")||($e(b, j-1, j)="ал")||($e(b, j-1, j)="ил")||($e(b, j-1, j)="ол")||($e(b, j-2, j)="изм")||($e(b, j-1, j)="ан")||($e(b, j-1, j)="ен")||($e(b, j-2, j)="ген")||($e(b, j-1, j)="ин")||($e(b, j-4, j)="штейн")||($e(b, j-1, j)="он")||($e(b, j-2, j)="сон")||($e(b, j-3, j)="скоп")||($e(b, j-1, j)="ер")||($e(b, j-1, j)="ёр")||($e(b, j-2, j)="тор")||($e(b, j-1, j)="ат")||($e(b, j-1, j)="ит")||($e(b, j-2, j)="ист") {
-			set b=lb_$lb($e(b, 1, j))
+			set b=lb_$listbuild($extract(b, 1, j))
 			quit b
 		}
-		if ($e(b,j-1,j)="ом")||($e(b,j-1,j)="ем")||($e(b,j-2,j)="азм")||($e(b, j-4, j)="грамм")||($e(b,j-1,j)="иц") {
+		if ($extract(b,j-1,j)="ом")||($extract(b,j-1,j)="ем")||($extract(b,j-2,j)="азм")||($extract(b, j-4, j)="грамм")||($extract(b,j-1,j)="иц") {
 		#;if ($e(b,j-1,j)="ом")||($e(b,j-1,j)="ём")||($e(b,j-1,j)="ем")||($e(b,j-2,j)="азм")||($e(b, j-4, j)="грамм")||($e(b,j-1,j)="иц") {
-			set b=lb_$lb($e(b, 1, j)_"а")
+			set b=lb_$listbuild($extract(b, 1, j)_"а")
 			quit b
 		}
 	}			
@@ -350,7 +350,7 @@ SELECT myDocument, myTitle, myPar FROM ft.doc where myDocument %CONTAINSTERM ('�
 	kill ^CacheTempPdgm1
 	kill ^CacheTempA1
 	close filename
-	open filename:("RK\CP1251\"):5 if '$t { quit 0 }
+	open filename:("RK\CP1251\"):5 if '$test { quit 0 }
 		use filename
 		read stringnum
 		for i=1:1:stringnum {
@@ -380,7 +380,7 @@ SELECT myDocument, myTitle, myPar FROM ft.doc where myDocument %CONTAINSTERM ('�
 <ReturnType>%List</ReturnType>
 <Implementation><![CDATA[
  ;делаем из леммы список словоформ
-	set string=$ZCONVERT(string ,"L")
+	set string=$zconvert(string ,"L")
 	set pdgm=$piece(string, " ",2)+1
 	set plist=^CacheTempPdgm1(pdgm)
 	set l=$listlength(plist) ;отбрасываем #
@@ -403,7 +403,7 @@ SELECT myDocument, myTitle, myPar FROM ft.doc where myDocument %CONTAINSTERM ('�
 <ReturnType>%List</ReturnType>
 <Implementation><![CDATA[
  ; строку парадигмы приводим к списку окончаний
-	set string=$ZCONVERT(string ,"L")
+	set string=$zconvert(string ,"L")
 	set lstring=$length(string, "*")
 	set paradigm=""
 	for j=1:1:lstring {
@@ -430,7 +430,7 @@ SELECT myDocument, myTitle, myPar FROM ft.doc where myDocument %CONTAINSTERM ('�
 		set ^Lemma(i)=$list(wlist, 1)
 		set b=$listlength(wlist)
 		for j=1:1:b {
-			set ^Dict($tr($list(wlist, j), "ё","е"),i)=""
+			set ^Dict($translate($list(wlist, j), "ё","е"),i)=""
 			}
 	}
 	kill ^CacheTempPdgm1
@@ -457,9 +457,9 @@ SELECT myDocument, myTitle, myPar FROM ft.doc where myDocument %CONTAINSTERM ('�
 			for i=1:1:number {
 				read str
 				set stem=$piece(str, " ", 1)
-				set l=$l(stem)
+				set l=$length(stem)
 				set k=$piece(str, " ", 2)
-				if ..cons($e(stem, l))=1 {		
+				if ..cons($extract(stem, l))=1 {		
 					if $data(a(k))=0 {
 						set a(k)=1
 						set array(i)=k
@@ -473,7 +473,7 @@ SELECT myDocument, myTitle, myPar FROM ft.doc where myDocument %CONTAINSTERM ('�
 							}
 						}
 					}
-				elseif ..cons($e(stem, l))=0 {		
+				elseif ..cons($extract(stem, l))=0 {		
 					if $data(a(k))=0 {
 						set a(k)=1
 						set array(i)=k
