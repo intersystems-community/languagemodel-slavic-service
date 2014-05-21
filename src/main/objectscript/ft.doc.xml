@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25" zv="Cache for UNIX (Apple Mac OS X for x86-64) 2014.2 (Build 240U)" ts="2014-05-21 16:08:41">
+<Class name="ft.doc">
+<IncludeCode>ft</IncludeCode>
+<Super>%Persistent</Super>
+<TimeChanged>63328,57455</TimeChanged>
+<TimeCreated>60653,61904.165335</TimeCreated>
+
+<Property name="myDocument">
+<Description>
+Абзац текста</Description>
+<Type>%Text</Type>
+<Parameter name="LANGUAGECLASS" value="%Text.Russian"/>
+<Parameter name="MAXLEN" value="8100"/>
+</Property>
+
+<UDLText name="T">
+<Content><![CDATA[
+//, SIMILARITYINDEX = "myIndex");
+
+]]></Content>
+</UDLText>
+
+<Property name="myTitle">
+<Description>
+Имя файла</Description>
+<Type>%String</Type>
+<Parameter name="MAXLEN" value="50"/>
+</Property>
+
+<Property name="myPar">
+<Description>
+Номер абзаца в файле</Description>
+<Type>%Integer</Type>
+</Property>
+
+<Index name="myIndex">
+<Type>bitmap</Type>
+<Properties>myDocument(KEYS)</Properties>
+</Index>
+
+<UDLText name="T">
+<Content><![CDATA[
+// [ Data = myDocument(ELEMENTS) ];
+
+]]></Content>
+</UDLText>
+
+<UDLText name="T">
+<Content><![CDATA[
+// [ Type = bitmap ];
+
+]]></Content>
+</UDLText>
+
+<Storage name="Default">
+<Type>%Library.CacheStorage</Type>
+<DataLocation>^ft.docD</DataLocation>
+<DefaultData>docDefaultData</DefaultData>
+<IdLocation>^ft.docD</IdLocation>
+<IndexLocation>^ft.docI</IndexLocation>
+<StreamLocation>^ft.docS</StreamLocation>
+<Data name="docDefaultData">
+<Structure>listnode</Structure>
+<Subscript/>
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>myDocument</Value>
+</Value>
+<Value name="3">
+<Value>myTitle</Value>
+</Value>
+<Value name="4">
+<Value>myPar</Value>
+</Value>
+</Data>
+</Storage>
+</Class>
+</Export>

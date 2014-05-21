@@ -8,5 +8,6 @@
 *.css		diff text ident
 *.js		diff text ident
 *.csp		diff text ident
+*.ro		diff text ident
 .project	diff text ident
 .classpath	diff text ident
